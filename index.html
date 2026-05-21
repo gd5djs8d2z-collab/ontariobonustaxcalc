@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Estimate Ontario bonus tax withholding for 2026. Uses the CRA T4032 annualization method — enter your salary, bonus, and pay frequency to see federal and provincial withholding, CPP, EI, and your estimated net bonus.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ontariobonustaxcalc.ca/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ontario Bonus Tax Calculator 2026 — CRA T4032 Method">
+  <meta property="og:description" content="Estimate how much tax, CPP, and EI your Ontario employer withholds from a bonus. Uses the CRA T4032 annualization method. Tax year 2026.">
+  <meta property="og:url" content="https://ontariobonustaxcalc.ca/">
+  <meta property="og:site_name" content="OntarioBonusTaxCalc.ca">
+
+  <title>Ontario Bonus Tax Calculator 2026 — CRA T4032 Withholding Estimate</title>
+
+  <!-- AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
+
+  <!-- Stylesheet with cache bust -->
+  <link rel="stylesheet" href="css/style.css?v=2026.1">
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Ontario Bonus Tax Calculator",
+    "url": "https://ontariobonustaxcalc.ca/",
+    "description": "Estimate Ontario bonus tax withholding using the CRA T4032 annualization method. Calculates federal and Ontario provincial withholding, CPP, CPP2, and EI impacts on your bonus for tax year 2026.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CAD"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "OntarioBonusTaxCalc.ca",
+      "url": "https://ontariobonustaxcalc.ca"
+    }
+  }
+  </script>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────────────────────── -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="/">
+      <span class="logo-maple">🍁</span>
+      <span class="logo-text">Ontario<span>BonusTaxCalc</span>.ca</span>
+    </a>
+    <nav class="site-nav" aria-label="Site navigation">
+      <a href="/faq.html">FAQ</a>
+      <a href="/about.html">About</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ── Hero ────────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🍁 Ontario &nbsp;·&nbsp; <span id="hero-year">2026</span> &nbsp;·&nbsp; CRA T4032</div>
+    <h1>Ontario Bonus Tax Calculator</h1>
+    <p>Estimate how much federal and Ontario tax, CPP, and EI your employer withholds from your bonus — using the CRA T4032 annualization method. <strong>Tax year <span class="res-year-static">2026</span></strong>.</p>
+  </div>
+</section>
+
+<!-- ── Main Content ─────────────────────────────────────────────────────────── -->
+<main class="main-content">
+
+  <!-- Trust Strip -->
+  <div class="trust-strip" role="note">
+    <span class="ts-item">✅ <strong>CRA T4032 Method</strong></span>
+    <span class="ts-sep">·</span>
+    <span class="ts-item">✅ <strong>Tax year <span class="res-year-static">2026</span></strong></span>
+    <span class="ts-sep">·</span>
+    <span class="ts-item">✅ <strong>CPP/EI threshold-aware</strong></span>
+    <span class="ts-sep">·</span>
+    <span class="ts-item">✅ <strong>Estimate only — not tax advice</strong></span>
+  </div>
+
+  <!-- AdSense slot (top) -->
+  <div class="ad-unit ad-inactive" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7744853829365165"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
+  <!-- Calculator Card -->
+  <div class="calc-card" id="calculator">
+    <div class="calc-header">
+      <span class="calc-icon">💰</span>
+      <h2>Ontario Bonus Withholding Estimator — <span class="res-year-static">2026</span></h2>
+    </div>
+    <div class="calc-body">
+
+      <!-- Error display -->
+      <div class="calc-error" id="calc-error" role="alert"></div>
+
+      <!-- Required Inputs -->
+      <div class="input-row">
+        <div class="input-group">
+          <label for="input-salary">Annual Base Salary <span class="label-sub">(before this bonus)</span></label>
+          <div class="input-wrap input-wrap-dollar">
+            <span class="input-prefix">$</span>
+            <input type="number" id="input-salary" min="0" max="2000000" step="100" value="85000" inputmode="numeric" aria-label="Annual base salary in Canadian dollars">
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="input-bonus">Bonus Amount</label>
+          <div class="input-wrap input-wrap-dollar">
+            <span class="input-prefix">$</span>
+            <input type="number" id="input-bonus" min="0" max="2000000" step="100" value="10000" inputmode="numeric" aria-label="Bonus amount in Canadian dollars">
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="input-pay-freq">Pay Frequency <span class="label-sub">(used by employer to annualize)</span></label>
+        <select id="input-pay-freq" aria-label="Pay frequency">
+          <option value="26" selected>Bi-weekly (26 periods)</option>
+          <option value="52">Weekly (52 periods)</option>
+          <option value="24">Semi-monthly (24 periods)</option>
+          <option value="12">Monthly (12 periods)</option>
+        </select>
+      </div>
+
+      <!-- Optional Inputs -->
+      <div class="optional-inputs">
+        <div class="optional-label">Optional Adjustments</div>
+        <div class="input-row">
+          <div class="input-group">
+            <label for="input-rrsp">RRSP Deduction <span class="label-sub">(claimed on TD1)</span></label>
+            <div class="input-wrap input-wrap-dollar">
+              <span class="input-prefix">$</span>
+              <input type="number" id="input-rrsp" min="0" max="500000" step="100" value="0" inputmode="numeric" aria-label="RRSP deduction amount">
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="input-additional-wh">Additional Withholding <span class="label-sub">(requested extra)</span></label>
+            <div class="input-wrap input-wrap-dollar">
+              <span class="input-prefix">$</span>
+              <input type="number" id="input-additional-wh" min="0" max="100000" step="50" value="0" inputmode="numeric" aria-label="Additional withholding amount">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-calculate" onclick="runBonusCalc()" aria-label="Calculate bonus tax withholding">
+        Calculate Bonus Withholding
+      </button>
+
+      <!-- Results Section -->
+      <section class="results-section" id="results-section" aria-live="polite">
+        <hr class="results-divider">
+        <div class="results-label">Withholding Estimate — Tax Year <span class="res-year-static">2026</span></div>
+
+        <!-- Rate blocks -->
+        <div class="rates-row">
+          <div class="rate-block">
+            <div class="rate-label">Effective Withholding Rate</div>
+            <div class="rate-value" id="res-effective-rate">—</div>
+            <div class="rate-sub">Total deductions ÷ gross bonus</div>
+          </div>
+          <div class="rate-block">
+            <div class="rate-label">Combined Marginal Rate</div>
+            <div class="rate-value" id="res-combined-marginal">—</div>
+            <div class="rate-sub">Federal + Ontario on next dollar</div>
+          </div>
+          <div class="rate-block">
+            <div class="rate-label">Annualized Income Estimate</div>
+            <div class="rate-value" id="res-annualized" style="font-size:1.1rem;">—</div>
+            <div class="rate-sub">Salary + bonus combined</div>
+          </div>
+        </div>
+
+        <!-- Primary summary -->
+        <div class="results-primary">
+          <div class="result-row result-highlight">
+            <span class="rr-label">Gross Bonus</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-gross-bonus">—</span>
+            </div>
+          </div>
+          <div class="result-row result-bold">
+            <span class="rr-label">Total Estimated Deductions</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-total-deductions">—</span>
+            </div>
+          </div>
+          <div class="result-row result-highlight">
+            <span class="rr-label">Estimated Net Bonus</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-net-bonus">—</span>
+              <span class="rr-sub">After withholding</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deduction breakdown -->
+        <div class="results-label">Deduction Breakdown</div>
+        <div class="results-primary">
+          <div class="result-row">
+            <span class="rr-label">Federal Income Tax Withholding</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-federal-wh">—</span>
+              <span class="rr-sub">Marginal fed rate: <span id="res-marginal-fed">—</span></span>
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="rr-label">Ontario Provincial Tax Withholding</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-ontario-wh">—</span>
+              <span class="rr-sub">Marginal Ontario rate: <span id="res-marginal-ont">—</span></span>
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="rr-label">CPP1 Contribution</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-cpp1">—</span>
+              <span class="rr-sub">Subject to annual max threshold</span>
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="rr-label">CPP2 Contribution</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-cpp2">—</span>
+              <span class="rr-sub">On earnings between YMPE &amp; YAMPE</span>
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="rr-label">EI Premium</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-ei">—</span>
+              <span class="rr-sub">Subject to annual max threshold</span>
+            </div>
+          </div>
+          <div class="result-row">
+            <span class="rr-label">Additional Withholding (requested)</span>
+            <div class="rr-right">
+              <span class="rr-value" id="res-additional-wh">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CPP/EI threshold notes -->
+        <div class="threshold-note" id="cpp-threshold-note" style="display:none;margin-bottom:6px;"></div>
+        <div class="threshold-note" id="ei-threshold-note" style="display:none;"></div>
+
+        <p class="results-note">
+          ⚠️ This is an employer withholding estimate only. Your actual taxes owed are calculated on your full-year T1 return — withholding may be over or under your final liability. Consult a CPA or tax advisor for personal tax planning.
+        </p>
+      </section>
+
+    </div><!-- /calc-body -->
+  </div><!-- /calc-card -->
+
+  <!-- AdSense slot (mid) -->
+  <div class="ad-unit ad-inactive" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7744853829365165"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
+  <!-- ── Authority Content Sections ──────────────────────────────────────── -->
+
+  <!-- 1. How Bonus Tax Works in Ontario -->
+  <article class="authority-section" id="how-it-works">
+    <h2>How Bonus Tax Works in Ontario</h2>
+    <p>When your Ontario employer pays you a bonus, they are legally required to withhold income tax, CPP contributions, and EI premiums before the money reaches your bank account. Unlike your regular bi-weekly or monthly paycheque — which is taxed based on a flat annualized projection of that regular amount — a bonus triggers a different withholding calculation under the <strong>CRA T4032 annualization method</strong>.</p>
+    <p>The employer does not simply apply a flat percentage to your bonus. Instead, they combine your bonus with your regular pay period income, project that combined figure over the full year, and then determine what marginal tax bracket applies to the extra income. That marginal tax becomes the withholding on your bonus.</p>
+    <h3>What This Calculator Computes</h3>
+    <p>For a $10,000 bonus on top of an $85,000 salary paid bi-weekly in Ontario, this calculator estimates:</p>
+    <ul>
+      <li>Federal income tax withholding: approx. $2,600 (26% marginal federal rate)</li>
+      <li>Ontario provincial tax withholding: approx. $910 (9.15% marginal Ontario rate)</li>
+      <li>CPP1/CPP2 impact: depends on your year-to-date earnings relative to YMPE ($74,600)</li>
+      <li>EI impact: depends on year-to-date insurable earnings relative to the $68,900 ceiling</li>
+      <li>Combined effective withholding rate: approximately 35–37% depending on timing</li>
+    </ul>
+    <h3>CRA T4032-ON Annualization Method</h3>
+    <p>The CRA T4032 bonus method requires the employer to:</p>
+    <ol>
+      <li>Annualize the employee's regular pay period income (e.g., bi-weekly pay × 26)</li>
+      <li>Calculate the total federal + Ontario tax on that annualized regular income</li>
+      <li>Add the bonus to the annualized income</li>
+      <li>Recalculate total federal + Ontario tax on the combined annualized amount</li>
+      <li>The difference between steps 4 and 2 is the income tax to withhold from the bonus</li>
+    </ol>
+    <div class="formula-display">Tax on bonus = Tax(annualized salary + bonus) − Tax(annualized salary)</div>
+    <p class="source-cite">Source: <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/payroll/t4032-payroll-deductions-tables/t4032on-jan/t4032on-january-general-information.html" target="_blank" rel="noopener noreferrer">CRA T4032-ON Payroll Deductions Tables (2026)</a></p>
+  </article>
+
+  <!-- 2. Why Your Bonus Looks Over-Taxed -->
+  <article class="authority-section" id="why-overtaxed">
+    <h2>Why Your Bonus Looks Over-Taxed</h2>
+    <p>Employees in Ontario frequently receive a $10,000 bonus and are surprised to see only $6,300–$6,500 deposited. The reason is not that bonuses are taxed at a special high rate — it is that the annualization method applies your <strong>marginal tax rate</strong> to the full bonus amount in a single pay period.</p>
+    <p>If your $85,000 salary places you in the 20.5% federal bracket, your entire $10,000 bonus is withheld at 20.5% federal + 9.15% Ontario + CPP + EI. Compare that to a regular bi-weekly paycheque of $3,269 — that pay period is only withholding its proportional share of tax across the full year.</p>
+    <h3>The Marginal Rate Misconception</h3>
+    <p>Many employees believe their entire salary is taxed at their marginal rate after receiving a bonus with heavy withholding. This is not how Canadian income tax works. Only the income above each bracket threshold is taxed at the higher rate. The annualization method concentrates the tax effect of the full bonus into one pay period, which is why withholding appears high relative to your normal cheque.</p>
+    <h3>The Annualization Effect in Practice</h3>
+    <p>Consider an employee earning $95,000 annually (bi-weekly). Their regular bi-weekly pay of $3,654 is withheld at rates spread across lower brackets. When a $15,000 bonus arrives, the annualization projects $110,000 total income — pushing the marginal federal rate to 26% on the portion above $117,045... actually, at $110,000, the federal marginal rate is still 20.5%, but the Ontario marginal rate may have increased. The entire bonus is then withheld at those marginal rates in a single period, creating the "over-taxed" appearance.</p>
+    <h3>Year-End True-Up</h3>
+    <p>At tax filing time (April 30 each year), your T1 return calculates your actual tax owing based on your total annual income. If your employer withheld more than your actual tax liability — which can happen if CPP/EI were over-withheld or if your income puts you in a lower effective bracket — the CRA refunds the excess. Withholding is not your final tax bill.</p>
+  </article>
+
+  <!-- 3. Bonus Withholding vs Actual Taxes Owed -->
+  <article class="authority-section" id="withholding-vs-actual">
+    <h2>Bonus Withholding vs Actual Taxes Owed</h2>
+    <p>The most important distinction in Canadian bonus taxation: <strong>employer withholding and CRA taxes owed are two separate things</strong>. What your employer deducts at source is a remittance on your behalf — it is not the final determination of your tax liability.</p>
+    <h3>Withholding (Employer Obligation)</h3>
+    <p>Under the <em>Income Tax Act</em> (Canada), employers must withhold estimated income tax on all employment income using the CRA T4032 tables. For bonuses, they use the annualization method described above. This withholding is credited toward your total annual tax balance.</p>
+    <h3>Actual Taxes Owed (T1 Return)</h3>
+    <p>Your actual Ontario income tax for the year is determined on your T1 General return by applying federal and Ontario brackets to your <strong>total annual taxable income</strong> — salary + bonus + any other income — after all credits and deductions. The Basic Personal Amount ($16,452 federal, $12,989 Ontario for 2026) offsets some tax before any bracket rate applies.</p>
+    <h3>Common Scenarios Where Withholding ≠ Tax Owing</h3>
+    <ul>
+      <li><strong>Over-withholding:</strong> Your bonus pushed projected annual income into a higher bracket, but your actual full-year income was lower (e.g., you left the job in September). CRA issues a refund.</li>
+      <li><strong>Under-withholding:</strong> You have other income sources (rental, freelance, investment) that your employer could not account for. You may owe additional tax in April.</li>
+      <li><strong>RRSP deduction:</strong> If you make an RRSP contribution before March 1 of the following year and claim it on your return, it reduces your taxable income and lowers your actual tax owing — potentially turning a "heavily withheld bonus" into a net refund.</li>
+      <li><strong>CPP/EI over-contributions:</strong> If you worked at multiple employers and collectively exceeded the annual CPP/EI maximums ($4,230.45 CPP1 / $1,123.07 EI for 2026), the CRA refunds the excess through your T1 return.</li>
+    </ul>
+  </article>
+
+  <!-- 4. CPP and EI on Bonuses -->
+  <article class="authority-section" id="cpp-ei">
+    <h2>CPP and EI on Bonuses</h2>
+    <p>CPP and EI are not withheld at a flat rate from your entire bonus. Both are subject to <strong>annual maximum contribution thresholds</strong>. Whether your bonus triggers CPP or EI — and how much — depends entirely on your year-to-date earnings at the time the bonus is paid.</p>
+    <h3>CPP1 on Bonuses (2026)</h3>
+    <p>CPP1 applies at <code>5.95%</code> on pensionable earnings between the <strong>basic exemption ($3,500)</strong> and the <strong>Year's Maximum Pensionable Earnings (YMPE: $74,600)</strong>. The maximum employee CPP1 contribution is <code>$4,230.45</code> per year.</p>
+    <ul>
+      <li>If your year-to-date salary is already above $74,600 before the bonus: <strong>zero CPP1</strong> is withheld from the bonus.</li>
+      <li>If your year-to-date salary is $60,000 and the bonus is $10,000: CPP1 applies only on the portion that brings total earnings up to $74,600 — i.e., on $10,000 (since $60,000 + $10,000 = $70,000 ≤ $74,600 in this case, the full $10,000 gets CPP1 at 5.95% = $595).</li>
+      <li>If your year-to-date salary is $70,000 and the bonus is $10,000: CPP1 applies only on $4,600 ($74,600 − $70,000) × 5.95% = $273.70.</li>
+    </ul>
+    <h3>CPP2 on Bonuses (2026)</h3>
+    <p>CPP2 applies at <code>4%</code> on earnings between the YMPE ($74,600) and the Year's Additional Maximum Pensionable Earnings (YAMPE: $85,000). The maximum CPP2 contribution is <code>$416.00</code> per year. CPP2 contributions do <strong>not</strong> generate a non-refundable tax credit.</p>
+    <h3>EI Premiums on Bonuses (2026)</h3>
+    <p>EI is withheld at <code>1.63%</code> on insurable earnings up to the annual maximum insurable earnings ceiling of <code>$68,900</code>. The maximum annual EI premium is <code>$1,123.07</code>.</p>
+    <ul>
+      <li>If your year-to-date salary already exceeds $68,900: <strong>zero EI</strong> is withheld from the bonus.</li>
+      <li>If your year-to-date salary is $65,000 and the bonus is $10,000: EI applies on $3,900 ($68,900 − $65,000) × 1.63% = $63.57.</li>
+    </ul>
+    <p class="source-cite">Sources: <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/cpp-contribution-rates-maximums-exemptions.html" target="_blank" rel="noopener noreferrer">CRA CPP 2026</a> &nbsp;·&nbsp; <a href="https://www.canada.ca/en/employment-social-development/news/2025/09/canada-employment-insurance-commission-sets-the-2026-employment-insurance-premium-rate.html" target="_blank" rel="noopener noreferrer">ESDC EI 2026</a></p>
+  </article>
+
+  <!-- 5. Ontario Bonus Examples -->
+  <article class="authority-section" id="examples">
+    <h2>Ontario Bonus Examples — Tax Year 2026</h2>
+    <p>The following examples use actual 2026 CRA rates and brackets. All calculations use the T4032 annualization method. Salary is assumed to be the total base salary earned through the full year (year-to-date earnings equal to annual salary at time of bonus payment).</p>
+
+    <div class="example-block">
+      <h3>Example 1 — $85,000 salary + $10,000 bonus (bi-weekly)</h3>
+      <p>Ontario employee, bi-weekly payroll, no RRSP deduction claimed on TD1, salary below YMPE.</p>
+      <div class="ex-row"><span>Gross bonus</span><span>$10,000.00</span></div>
+      <div class="ex-row"><span>Federal withholding (20.5% marginal)</span><span>$2,050.00</span></div>
+      <div class="ex-row"><span>Ontario withholding (9.15% marginal)</span><span>$915.00</span></div>
+      <div class="ex-row"><span>CPP1 (salary &lt; YMPE; full bonus subject)</span><span>$595.00</span></div>
+      <div class="ex-row"><span>CPP2 (salary &lt; YAMPE; partial band)</span><span>$0.00</span></div>
+      <div class="ex-row"><span>EI (salary &lt; max insurable)</span><span>$163.00</span></div>
+      <div class="ex-row ex-total"><span>Total deductions</span><span>$3,723.00</span></div>
+      <div class="ex-row ex-net"><span>Estimated net bonus</span><span>$6,277.00</span></div>
+      <div class="ex-row"><span>Effective withholding rate</span><span>37.2%</span></div>
+    </div>
+
+    <div class="example-block">
+      <h3>Example 2 — $120,000 salary + $25,000 bonus (bi-weekly)</h3>
+      <p>Higher-income Ontario employee. Salary exceeds YMPE ($74,600) and max insurable EI ($68,900) — CPP2 partial, no EI on bonus.</p>
+      <div class="ex-row"><span>Gross bonus</span><span>$25,000.00</span></div>
+      <div class="ex-row"><span>Federal withholding (26% marginal)</span><span>$6,500.00</span></div>
+      <div class="ex-row"><span>Ontario withholding (11.16% marginal)</span><span>$2,790.00</span></div>
+      <div class="ex-row"><span>CPP1 (salary &gt; YMPE — none)</span><span>$0.00</span></div>
+      <div class="ex-row"><span>CPP2 (salary &gt; YAMPE — none)</span><span>$0.00</span></div>
+      <div class="ex-row"><span>EI (salary &gt; max insurable — none)</span><span>$0.00</span></div>
+      <div class="ex-row ex-total"><span>Total deductions</span><span>$9,290.00</span></div>
+      <div class="ex-row ex-net"><span>Estimated net bonus</span><span>$15,710.00</span></div>
+      <div class="ex-row"><span>Effective withholding rate</span><span>37.2%</span></div>
+    </div>
+
+    <div class="example-block">
+      <h3>Example 3 — $55,000 salary + $5,000 bonus (monthly) — RRSP edge case</h3>
+      <p>Lower-income Ontario employee. RRSP deduction of $3,000 claimed on TD1, reducing withholding basis.</p>
+      <div class="ex-row"><span>Gross bonus</span><span>$5,000.00</span></div>
+      <div class="ex-row"><span>Federal withholding (14% marginal — reduced by RRSP)</span><span>$700.00</span></div>
+      <div class="ex-row"><span>Ontario withholding (5.05% marginal)</span><span>$252.50</span></div>
+      <div class="ex-row"><span>CPP1 (5.95% on full bonus — under YMPE)</span><span>$297.50</span></div>
+      <div class="ex-row"><span>CPP2</span><span>$0.00</span></div>
+      <div class="ex-row"><span>EI (1.63% on full bonus — under ceiling)</span><span>$81.50</span></div>
+      <div class="ex-row ex-total"><span>Total deductions</span><span>$1,331.50</span></div>
+      <div class="ex-row ex-net"><span>Estimated net bonus</span><span>$3,668.50</span></div>
+      <div class="ex-row"><span>Effective withholding rate</span><span>26.6%</span></div>
+    </div>
+  </article>
+
+  <!-- 6. Common Bonus Tax Questions (FAQ) -->
+  <article class="authority-section" id="faq">
+    <h2>Common Bonus Tax Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Is bonus income taxed at a higher rate than regular salary in Ontario?</div>
+      <div class="faq-a">
+        <p>No — bonus income is employment income and taxed at the same progressive bracket rates. What changes is the <em>withholding method</em>. The CRA T4032 annualization concentrates your marginal rate onto the full bonus in a single pay period, making withholding appear higher than your regular cheque. Your T1 return reconciles this against your actual annual income.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I reduce bonus withholding by asking my employer to hold back on CPP or EI?</div>
+      <div class="faq-a">
+        <p>No. Employers are legally required to withhold CPP and EI under the <em>Canada Pension Plan Act</em> and the <em>Employment Insurance Act</em> respectively — subject only to the annual maximum thresholds. However, if you are approaching the annual maximums ($4,230.45 CPP1 / $1,123.07 EI), the employer is obligated to reduce deductions accordingly. You can also ask your employer to apply an RRSP deduction amount on Form TD1 to reduce income tax withholding.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Why does my net bonus seem lower mid-year versus year-end?</div>
+      <div class="faq-a">
+        <p>Timing matters significantly for CPP and EI. If your bonus is paid in July and your year-to-date salary is $40,000, your employer must still withhold CPP1 and EI on the bonus (since you haven't reached the YMPE or insurable earnings ceiling). If the bonus came in December after your salary had already pushed you past the YMPE, no CPP would be withheld. Income tax withholding using the annualization method is not affected by timing — only CPP and EI are timing-sensitive.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does contributing to an RRSP reduce my bonus tax withholding?</div>
+      <div class="faq-a">
+        <p>Yes — if you have authorized your employer to reduce withholding for RRSP contributions on your TD1 or TD1ON, the RRSP deduction reduces your taxable income before the withholding calculation. In this calculator, enter your RRSP deduction in the Optional Adjustments section. Note: RRSP contributions affect income tax only — not CPP or EI.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What is CPP2 and does it apply to my bonus?</div>
+      <div class="faq-a">
+        <p>CPP2 is the second additional Canada Pension Plan contribution that applies at 4% on earnings between the YMPE ($74,600) and the YAMPE ($85,000). If your year-to-date salary plus the bonus brings total earnings into the $74,600–$85,000 band, CPP2 applies on that portion. CPP2 contributions provide no non-refundable tax credit, unlike CPP1.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">My employer used a flat 30% withholding on my bonus — is that correct?</div>
+      <div class="faq-a">
+        <p>No. The CRA does not authorize a flat-rate lump-sum withholding for employment bonuses in Ontario. The correct method is the T4032 annualization method. Some employers may use simplified approximations, but any significant deviation from the annualization method should be verified with your payroll department. If under-withheld, you may owe tax on your T1 return.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How does Ontario surtax interact with bonus income?</div>
+      <div class="faq-a">
+        <p>Ontario surtax is an additional provincial tax that applies when your basic Ontario tax exceeds $5,818 (20% surtax on the excess) or $7,446 (an additional 36% surtax). For 2026, this typically affects incomes above approximately $90,000–$100,000. If your bonus pushes your annualized income into surtax territory, the T4032 withholding includes the surtax automatically — this calculator accounts for it.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 7. CRA Methodology -->
+  <article class="authority-section" id="methodology">
+    <h2>CRA Methodology &amp; Formula Transparency</h2>
+    <p>All calculations in this tool use the <strong>CRA T4032-ON Bonus Method</strong> (annualization) as documented in the Payroll Deductions Tables for Ontario, effective January 2026.</p>
+    <h3>Step-by-Step Calculation</h3>
+    <ol>
+      <li><strong>Annualize regular income:</strong> <code>Regular period income × pay periods per year</code></li>
+      <li><strong>Calculate tax on annualized salary:</strong> Apply federal brackets, subtract Federal BPA credit (<code>$16,452 × 14%</code>); apply Ontario brackets, subtract Ontario BPA credit (<code>$12,989 × 5.05%</code>); add Ontario surtax if applicable.</li>
+      <li><strong>Add bonus:</strong> <code>Annualized salary + bonus amount</code></li>
+      <li><strong>Recalculate tax on combined total</strong> using same method as step 2.</li>
+      <li><strong>Tax to withhold on bonus:</strong> <code>Tax(salary + bonus) − Tax(salary)</code></li>
+      <li><strong>CPP1 on bonus:</strong> <code>min(bonus × 5.95%, remaining CPP1 room)</code> — limited to earnings below YMPE ($74,600).</li>
+      <li><strong>CPP2 on bonus:</strong> <code>min(bonus portion in YMPE–YAMPE band × 4%, remaining CPP2 room)</code></li>
+      <li><strong>EI on bonus:</strong> <code>min(bonus portion below max insurable ceiling × 1.63%, remaining EI room)</code></li>
+      <li><strong>Optional deduction:</strong> RRSP deduction reduces taxable income at steps 2 and 4.</li>
+    </ol>
+    <h3>2026 Rates Reference</h3>
+    <ul>
+      <li>Federal brackets: 14% / 20.5% / 26% / 29% / 33%</li>
+      <li>Ontario brackets: 5.05% / 9.15% / 11.16% / 12.16% / 13.16%</li>
+      <li>Federal BPA: $16,452 (full) | Credit rate: 14%</li>
+      <li>Ontario BPA: $12,989 | Credit rate: 5.05%</li>
+      <li>CPP1: 5.95% | YMPE: $74,600 | Max: $4,230.45</li>
+      <li>CPP2: 4.00% | YAMPE: $85,000 | Max: $416.00</li>
+      <li>EI: 1.63% | Max insurable: $68,900 | Max premium: $1,123.07</li>
+    </ul>
+    <h3>Data Sources</h3>
+    <ul class="source-list">
+      <li><a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/payroll/t4032-payroll-deductions-tables/t4032on-jan/t4032on-january-general-information.html" target="_blank" rel="noopener noreferrer">CRA T4032-ON Payroll Deductions Tables — January 2026</a></li>
+      <li><a href="https://www.canada.ca/en/revenue-agency/services/tax/individuals/frequently-asked-questions-individuals/canadian-income-tax-rates-individuals-current-previous-years.html" target="_blank" rel="noopener noreferrer">CRA Individual Tax Rates — Current and Previous Years</a></li>
+      <li><a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/cpp-contribution-rates-maximums-exemptions.html" target="_blank" rel="noopener noreferrer">CRA CPP Contribution Rates, Maximums &amp; Exemptions — 2026</a></li>
+      <li><a href="https://www.canada.ca/en/employment-social-development/news/2025/09/canada-employment-insurance-commission-sets-the-2026-employment-insurance-premium-rate.html" target="_blank" rel="noopener noreferrer">ESDC — 2026 EI Premium Rate Announcement</a></li>
+    </ul>
+    <h3>Limitations</h3>
+    <ul>
+      <li>This calculator estimates employer <em>withholding</em> — not your final T1 tax liability.</li>
+      <li>Quebec employees follow a different provincial system (QPP, Quebec income tax) — this tool is Ontario-only.</li>
+      <li>Non-resident employees or those with complex TD1/TD1ON claim codes may see different results from their employer.</li>
+      <li>Self-employed individuals do not have bonus withholding — they pay tax through quarterly instalments or on their T1 return.</li>
+      <li>Ontario surtax approximation applies where basic Ontario tax exceeds CRA thresholds; exact surtax amounts depend on the full T1 calculation.</li>
+      <li>Multiple employment income sources in the same year are not modelled — enter combined salary if applicable.</li>
+    </ul>
+  </article>
+
+  <!-- 8. Related Ontario Payroll Calculators (rendered by network.js) -->
+  <section class="related-section" id="related-tools" aria-label="Related Ontario payroll tools">
+    <h2 class="related-heading">Related Ontario Payroll Calculators</h2>
+    <div class="related-grid" id="related-grid-render"></div>
+  </section>
+
+  <!-- AdSense slot (bottom) -->
+  <div class="ad-unit ad-inactive" aria-hidden="true">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7744853829365165"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+
+</main>
+
+<!-- ── Footer (rendered by network.js via #network-footer) ─────────────────── -->
+<footer class="site-footer">
+  <div id="network-footer"></div>
+</footer>
+
+<!-- Scripts: config MUST load before calculator -->
+<script src="js/config.js"></script>
+<script src="js/calculator.js"></script>
+<script src="js/network.js"></script>
+
+<script>
+(function () {
+  "use strict";
+  var C = BONUS_CONFIG;
+
+  // Set tax year in all year placeholders
+  document.querySelectorAll(".res-year-static, #hero-year").forEach(function (el) {
+    el.textContent = C.taxYear;
+  });
+
+  // Populate related tools grid (secondary inline grid, separate from footer)
+  var SELF = C.siteUrl;
+  var grid = document.getElementById("related-grid-render");
+  if (grid) {
+    var html = NETWORK_TOOLS.filter(function (t) {
+      return t.live && t.url !== SELF;
+    }).map(function (t) {
+      return '<a class="related-card" href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
+        '<div class="rc-name">' + t.name + '</div>' +
+        '<div class="rc-desc">' + t.desc + '</div>' +
+        '</a>';
+    }).join("");
+    grid.innerHTML = html;
+  }
+
+  // CPP/EI threshold note auto-show
+  function watchThresholdNotes() {
+    ["cpp-threshold-note", "ei-threshold-note"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) {
+        var observer = new MutationObserver(function () {
+          el.style.display = el.textContent.trim() ? "block" : "none";
+        });
+        observer.observe(el, { childList: true, characterData: true, subtree: true });
+        el.style.display = "none";
+      }
+    });
+  }
+  watchThresholdNotes();
+
+  // Auto-calculate on page load with default values
+  if (window.runBonusCalc) {
+    window.runBonusCalc();
+  }
+})();
+</script>
+
+</body>
+</html>
