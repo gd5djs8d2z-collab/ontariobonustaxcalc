@@ -221,7 +221,7 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   pointer-events: none;
   font-family: 'IBM Plex Mono', monospace;
 }
-.input-wrap-dollar input { padding-left: 36px; }
+.input-wrap-dollar input[type="number"] { padding-left: 36px; }
 .input-group input[type="number"],
 .input-group select {
   width: 100%;
