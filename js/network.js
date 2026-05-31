@@ -44,7 +44,7 @@ function renderFooter() {
     '<div class="container">' +
       '<div class="footer-grid footer-grid-4">' +
         '<div class="footer-brand">' +
-          '<div class="logo">\uD83C\uDF10 OntarioBonusTaxCalc.ca</div>' +
+          '<div class="logo">\uD83C\uDF41 OntarioBonusTaxCalc.ca</div>' +
           '<p>Ontario bonus tax withholding calculations for 2026. All calculations run in your browser. No data stored.</p>' +
         '</div>' +
         '<div class="footer-col">' +
