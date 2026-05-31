@@ -8,40 +8,86 @@
   <link rel="canonical" href="https://ontariobonustaxcalc.ca/contact.html">
   <title>Contact — OntarioBonusTaxCalc.ca</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/style.css?v=2026.1">
+  <link rel="stylesheet" href="css/style.css?v=2026.2">
 </head>
 <body class="support-page">
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="site-logo" href="/">
+    <a class="site-logo" href="index.html">
       <span class="logo-maple">🍁</span>
       <span class="logo-text">Ontario<span>BonusTaxCalc</span>.ca</span>
     </a>
-    <nav class="site-nav" aria-label="Site navigation">
+    <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
-      <a href="/faq.html">FAQ</a>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
     </nav>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="faq.html">FAQ</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
 <main class="main-content">
-  <h1>Contact</h1>
-  <p class="page-meta">OntarioBonusTaxCalc.ca — part of the calc-hq.ca network</p>
+  <div class="page-hero">
+    <h1>Get in Touch</h1>
+    <p class="page-meta">Have a question about Ontario bonus tax withholding? Check our <a href="faq.html">FAQ</a> first — most common questions are answered there.</p>
+  </div>
 
-  <h2>Partnership &amp; Advertising Inquiries</h2>
-  <p>For partnership inquiries, content collaboration, or advertising on the Ontario payroll calculator network, email: <a href="mailto:partnerships@calc-hq.ca">partnerships@calc-hq.ca</a></p>
+  <div class="contact-partnership">
+    <h2>Partnership & Advertising Inquiries</h2>
+    <p>For partnership, content collaboration, or advertising on the Ontario payroll calculator network:</p>
+    <p class="contact-email"><a href="mailto:partnerships@calc-hq.ca">partnerships@calc-hq.ca</a></p>
+  </div>
 
-  <h2>Corrections &amp; Rate Updates</h2>
-  <p>If you believe a tax rate, bracket threshold, CPP maximum, or EI ceiling is out of date or incorrect, please email us with a reference to the official CRA or ESDC source. We update rates as soon as new T4032 tables are released. Current data reflects CRA T4032-ON and ESDC rates published for tax year 2026.</p>
+  <form class="contact-form" id="contact-form" novalidate>
+    <div class="field">
+      <label for="cf-name">Your Name</label>
+      <input type="text" id="cf-name" name="name" placeholder="Jane Smith" required>
+    </div>
+    <div class="field">
+      <label for="cf-email">Email Address</label>
+      <input type="email" id="cf-email" name="email" placeholder="jane@example.com" required>
+    </div>
+    <div class="field">
+      <label for="cf-subject">Subject</label>
+      <input type="text" id="cf-subject" name="subject" placeholder="What's this about?">
+    </div>
+    <div class="field">
+      <label for="cf-message">Message</label>
+      <textarea id="cf-message" name="message" placeholder="Your message..." rows="5" required></textarea>
+    </div>
+    <div class="field">
+      <button type="submit" class="calc-btn">Send Message</button>
+    </div>
+  </form>
 
-  <h2>Calculator Feedback</h2>
-  <p>We welcome feedback on the user experience, calculation methodology, or content accuracy. Use the partnership email above and include "Calculator Feedback" in the subject line.</p>
+  <h2>What We Can Help With</h2>
+  <ul>
+    <li>Corrections to tax rates, bracket thresholds, or CPP/EI maximums</li>
+    <li>Calculator methodology questions or feedback</li>
+    <li>Partnership or advertising inquiries</li>
+    <li>Broken links or display issues</li>
+  </ul>
 
   <h2>What We Cannot Help With</h2>
-  <p>We cannot provide personal tax advice, T1 return preparation assistance, or CRA account support. For personal tax situations, consult a qualified CPA or tax professional. For CRA account questions, contact the <a href="https://www.canada.ca/en/revenue-agency/services/e-services/e-services-individuals/account-individuals.html" target="_blank" rel="noopener noreferrer">CRA My Account portal</a>.</p>
+  <ul>
+    <li>Personal tax advice or T1 return preparation</li>
+    <li>CRA account support — contact the <a href="https://www.canada.ca/en/revenue-agency/services/e-services/e-services-individuals/account-individuals.html" target="_blank" rel="noopener noreferrer">CRA My Account portal</a></li>
+    <li>Employer payroll setup or software configuration</li>
+    <li>Legal advice on employment contracts or severance agreements</li>
+  </ul>
 </main>
 
 <footer class="site-footer">
@@ -50,5 +96,38 @@
 
 <script src="js/config.js"></script>
 <script src="js/network.js"></script>
+<script>
+function handleContactSubmit(e) {
+  e.preventDefault();
+  var form = e.target;
+  var btn = form.querySelector('button[type="submit"]');
+  btn.textContent = 'Message Sent';
+  btn.disabled = true;
+  form.reset();
+}
+document.getElementById('contact-form').addEventListener('submit', handleContactSubmit);
+
+var hamburger = document.querySelector('.hamburger');
+var mobileNav = document.getElementById('mobile-nav');
+var overlay = document.getElementById('mobile-overlay');
+function toggleMenu() {
+  var isOpen = hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('active', isOpen);
+  overlay.classList.toggle('active', isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
+}
+function closeMenu() {
+  hamburger.classList.remove('active');
+  mobileNav.classList.remove('active');
+  overlay.classList.remove('active');
+  hamburger.setAttribute('aria-expanded', 'false');
+}
+if (hamburger) {
+  hamburger.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', closeMenu);
+  mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+}
+</script>
+
 </body>
 </html>

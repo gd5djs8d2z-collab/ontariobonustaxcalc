@@ -8,24 +8,36 @@
   <link rel="canonical" href="https://ontariobonustaxcalc.ca/about.html">
   <title>About — OntarioBonusTaxCalc.ca</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/style.css?v=2026.1">
+  <link rel="stylesheet" href="css/style.css?v=2026.2">
 </head>
 <body class="support-page">
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="site-logo" href="/">
+    <a class="site-logo" href="index.html">
       <span class="logo-maple">🍁</span>
       <span class="logo-text">Ontario<span>BonusTaxCalc</span>.ca</span>
     </a>
-    <nav class="site-nav" aria-label="Site navigation">
+    <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
-      <a href="/faq.html">FAQ</a>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="faq.html">FAQ</a>
+  <a href="about.html" class="active">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
 <main class="main-content">
   <h1>About OntarioBonusTaxCalc.ca</h1>
@@ -50,14 +62,8 @@
     <li>ESDC 2026 Employment Insurance Premium Rate Announcement</li>
   </ul>
 
-  <h2>Part of the Ontario Payroll Network</h2>
-  <p>This calculator is part of the <a href="https://calc-hq.ca" target="_blank" rel="noopener noreferrer">calc-hq.ca</a> Ontario payroll calculator network, which includes:</p>
-  <ul>
-    <li><a href="https://ontariotakehomecalc.ca" target="_blank" rel="noopener noreferrer">OntarioTakeHomeCalc.ca</a> — Estimate Ontario net pay after all deductions</li>
-    <li><a href="https://ontarioincometaxcalc.ca" target="_blank" rel="noopener noreferrer">OntarioIncomeTaxCalc.ca</a> — Full bracket breakdown, marginal vs effective rate</li>
-    <li><a href="https://ontarioraisecalc.ca" target="_blank" rel="noopener noreferrer">OntarioRaiseCalc.ca</a> — After-tax impact of a raise or salary change</li>
-    <li><a href="https://marginaltaxcalc.ca" target="_blank" rel="noopener noreferrer">MarginalTaxCalc.ca</a> — Combined federal and Ontario marginal rates</li>
-  </ul>
+  <h2>Part of the Calc-HQ.ca Network</h2>
+  <p>This calculator is part of the <a href="https://calc-hq.ca" target="_blank" rel="noopener noreferrer">Calc-HQ.ca</a> Ontario payroll calculator network. See the footer for related tools.</p>
 </main>
 
 <footer class="site-footer">
@@ -66,5 +72,29 @@
 
 <script src="js/config.js"></script>
 <script src="js/network.js"></script>
+
+<script>
+  var hamburger = document.querySelector('.hamburger');
+  var mobileNav = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-overlay');
+  function toggleMenu() {
+    var isOpen = hamburger.classList.toggle('active');
+    mobileNav.classList.toggle('active', isOpen);
+    overlay.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+  }
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+    mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+  }
+</script>
+
 </body>
 </html>

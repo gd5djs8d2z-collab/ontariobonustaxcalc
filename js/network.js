@@ -40,47 +40,54 @@ function renderFooter() {
   var footerEl = document.getElementById("network-footer");
   if (!footerEl) return;
 
-  var relatedTools = NETWORK_TOOLS.filter(function(t) {
-    return t.live && t.url !== CURRENT_SITE;
-  });
-
-  var relatedHtml = relatedTools.map(function(t) {
-    return '<a class="related-card" href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
-      '<div class="rc-name">' + t.name + '</div>' +
-      '<div class="rc-desc">' + t.desc + '</div>' +
-      '</a>';
-  }).join("");
-
   footerEl.innerHTML =
-    '<div class="footer-inner">' +
-      '<div class="footer-grid">' +
-        '<div class="footer-col footer-col-related">' +
-          '<div class="footer-col-head">Related Tools</div>' +
-          '<div class="footer-related-grid">' + relatedHtml + '</div>' +
+    '<div class="container">' +
+      '<div class="footer-grid footer-grid-4">' +
+        '<div class="footer-brand">' +
+          '<div class="logo">\uD83C\uDF10 OntarioBonusTaxCalc.ca</div>' +
+          '<p>Ontario bonus tax withholding calculations for 2026. All calculations run in your browser. No data stored.</p>' +
         '</div>' +
         '<div class="footer-col">' +
-          '<div class="footer-col-head">More Tools</div>' +
-          '<a href="https://calc-hq.ca" target="_blank" rel="noopener noreferrer">calc-hq.ca</a>' +
+          '<h4>PAGES</h4>' +
+          '<a href="index.html">Home</a>' +
+          '<a href="faq.html">FAQ</a>' +
+          '<a href="about.html">About</a>' +
+          '<a href="contact.html">Contact</a>' +
         '</div>' +
         '<div class="footer-col">' +
-          '<div class="footer-col-head">Pages</div>' +
-          '<a href="/">Home</a>' +
-          '<a href="/faq.html">FAQ</a>' +
-          '<a href="/about.html">About</a>' +
-          '<a href="/contact.html">Contact</a>' +
+          '<h4>LEGAL</h4>' +
+          '<a href="privacy.html">Privacy Policy</a>' +
+          '<a href="disclaimer.html">Disclaimer</a>' +
+          '<a href="terms.html">Terms of Use</a>' +
         '</div>' +
         '<div class="footer-col">' +
-          '<div class="footer-col-head">Legal</div>' +
-          '<a href="/privacy.html">Privacy Policy</a>' +
-          '<a href="/disclaimer.html">Disclaimer</a>' +
-          '<a href="/terms.html">Terms of Use</a>' +
+          '<h4>RELATED TOOLS</h4>' +
+          '<div id="related-tools"></div>' +
+          '<a href="https://calc-hq.ca/" class="more-tools-link" rel="noopener"><strong>More Tools</strong> \u2192 Calc-HQ.ca</a>' +
         '</div>' +
       '</div>' +
       '<div class="footer-bottom">' +
-        '<p>&copy; 2026 OntarioBonusTaxCalc.ca &mdash; Estimates only. Not tax advice. Consult a qualified tax professional for your specific situation.</p>' +
-        '<p><a href="/privacy.html">Privacy</a> &middot; <a href="/contact.html">Contact</a> &middot; <a href="/disclaimer.html">Disclaimer</a></p>' +
+        '<span>\u00A9 2026 OntarioBonusTaxCalc.ca \u2014 Part of the <a href="https://calc-hq.ca/" rel="noopener">Calc-HQ.ca</a> network</span>' +
+        '<span>For informational purposes only. Not tax advice.</span>' +
       '</div>' +
     '</div>';
+
+  renderFooterRelatedTools();
+}
+
+function renderFooterRelatedTools() {
+  var container = document.getElementById("related-tools");
+  if (!container) return;
+
+  var html = "";
+  NETWORK_TOOLS.forEach(function (tool) {
+    if (!tool.live) return;
+    if (tool.url === CURRENT_SITE) return;
+
+    html += '<a href="' + tool.url + '" rel="noopener">' + tool.name + '</a>';
+  });
+
+  container.innerHTML = html;
 }
 
 document.addEventListener("DOMContentLoaded", renderFooter);

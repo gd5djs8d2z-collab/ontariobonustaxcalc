@@ -20,7 +20,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
 
   <!-- Stylesheet with cache bust -->
-  <link rel="stylesheet" href="css/style.css?v=2026.1">
+  <link rel="stylesheet" href="css/style.css?v=2026.2">
 
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -51,18 +51,30 @@
 <!-- ── Header ──────────────────────────────────────────────────────────────── -->
 <header class="site-header">
   <div class="header-inner">
-    <a class="site-logo" href="/">
+    <a class="site-logo" href="index.html">
       <span class="logo-maple">🍁</span>
       <span class="logo-text">Ontario<span>BonusTaxCalc</span>.ca</span>
     </a>
-    <nav class="site-nav" aria-label="Site navigation">
-      <a href="index.html">Home</a>
-      <a href="/faq.html">FAQ</a>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="faq.html">FAQ</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
 <!-- ── Hero ────────────────────────────────────────────────────────────────── -->
 <section class="hero">
@@ -405,42 +417,14 @@
     </div>
   </article>
 
-  <!-- 6. Common Bonus Tax Questions (FAQ) -->
+  <!-- 6. Common Bonus Tax Questions (high-intent decision content) -->
   <article class="authority-section" id="faq">
     <h2>Common Bonus Tax Questions</h2>
-
-    <div class="faq-item">
-      <div class="faq-q">Is bonus income taxed at a higher rate than regular salary in Ontario?</div>
-      <div class="faq-a">
-        <p>No — bonus income is employment income and taxed at the same progressive bracket rates. What changes is the <em>withholding method</em>. The CRA T4032 annualization concentrates your marginal rate onto the full bonus in a single pay period, making withholding appear higher than your regular cheque. Your T1 return reconciles this against your actual annual income.</p>
-      </div>
-    </div>
 
     <div class="faq-item">
       <div class="faq-q">Can I reduce bonus withholding by asking my employer to hold back on CPP or EI?</div>
       <div class="faq-a">
         <p>No. Employers are legally required to withhold CPP and EI under the <em>Canada Pension Plan Act</em> and the <em>Employment Insurance Act</em> respectively — subject only to the annual maximum thresholds. However, if you are approaching the annual maximums ($4,230.45 CPP1 / $1,123.07 EI), the employer is obligated to reduce deductions accordingly. You can also ask your employer to apply an RRSP deduction amount on Form TD1 to reduce income tax withholding.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">Why does my net bonus seem lower mid-year versus year-end?</div>
-      <div class="faq-a">
-        <p>Timing matters significantly for CPP and EI. If your bonus is paid in July and your year-to-date salary is $40,000, your employer must still withhold CPP1 and EI on the bonus (since you haven't reached the YMPE or insurable earnings ceiling). If the bonus came in December after your salary had already pushed you past the YMPE, no CPP would be withheld. Income tax withholding using the annualization method is not affected by timing — only CPP and EI are timing-sensitive.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">Does contributing to an RRSP reduce my bonus tax withholding?</div>
-      <div class="faq-a">
-        <p>Yes — if you have authorized your employer to reduce withholding for RRSP contributions on your TD1 or TD1ON, the RRSP deduction reduces your taxable income before the withholding calculation. In this calculator, enter your RRSP deduction in the Optional Adjustments section. Note: RRSP contributions affect income tax only — not CPP or EI.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">What is CPP2 and does it apply to my bonus?</div>
-      <div class="faq-a">
-        <p>CPP2 is the second additional Canada Pension Plan contribution that applies at 4% on earnings between the YMPE ($74,600) and the YAMPE ($85,000). If your year-to-date salary plus the bonus brings total earnings into the $74,600–$85,000 band, CPP2 applies on that portion. CPP2 contributions provide no non-refundable tax credit, unlike CPP1.</p>
       </div>
     </div>
 
@@ -504,12 +488,6 @@
     </ul>
   </article>
 
-  <!-- 8. Related Ontario Payroll Calculators (rendered by network.js) -->
-  <section class="related-section" id="related-tools" aria-label="Related Ontario payroll tools">
-    <h2 class="related-heading">Related Tools</h2>
-    <div class="related-grid" id="related-grid-render"></div>
-  </section>
-
   <!-- AdSense slot (bottom) -->
   <div class="ad-unit ad-inactive" aria-hidden="true">
     <ins class="adsbygoogle"
@@ -531,6 +509,28 @@
 <script src="js/config.js"></script>
 <script src="js/calculator.js"></script>
 <script src="js/network.js"></script>
+<script>
+  var hamburger = document.querySelector('.hamburger');
+  var mobileNav = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-overlay');
+  function toggleMenu() {
+    var isOpen = hamburger.classList.toggle('active');
+    mobileNav.classList.toggle('active', isOpen);
+    overlay.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+  }
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+    mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+  }
+</script>
 
 <script>
 (function () {
@@ -541,21 +541,6 @@
   document.querySelectorAll(".res-year-static, #hero-year").forEach(function (el) {
     el.textContent = C.taxYear;
   });
-
-  // Populate related tools grid (secondary inline grid, separate from footer)
-  var SELF = C.siteUrl;
-  var grid = document.getElementById("related-grid-render");
-  if (grid) {
-    var html = NETWORK_TOOLS.filter(function (t) {
-      return t.live && t.url !== SELF;
-    }).map(function (t) {
-      return '<a class="related-card" href="' + t.url + '" target="_blank" rel="noopener noreferrer">' +
-        '<div class="rc-name">' + t.name + '</div>' +
-        '<div class="rc-desc">' + t.desc + '</div>' +
-        '</a>';
-    }).join("");
-    grid.innerHTML = html;
-  }
 
   // CPP/EI threshold note auto-show
   function watchThresholdNotes() {

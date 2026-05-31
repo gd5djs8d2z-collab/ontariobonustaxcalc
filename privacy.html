@@ -8,24 +8,36 @@
   <link rel="canonical" href="https://ontariobonustaxcalc.ca/privacy.html">
   <title>Privacy Policy — OntarioBonusTaxCalc.ca</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/style.css?v=2026.1">
+  <link rel="stylesheet" href="css/style.css?v=2026.2">
 </head>
 <body class="support-page">
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="site-logo" href="/">
+    <a class="site-logo" href="index.html">
       <span class="logo-maple">🍁</span>
       <span class="logo-text">Ontario<span>BonusTaxCalc</span>.ca</span>
     </a>
-    <nav class="site-nav" aria-label="Site navigation">
+    <nav class="site-nav" aria-label="Main navigation">
       <a href="index.html">Home</a>
-      <a href="/faq.html">FAQ</a>
-      <a href="/about.html">About</a>
-      <a href="/contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<!-- Mobile nav overlay -->
+<div class="mobile-nav-overlay" id="mobile-overlay"></div>
+<nav class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="faq.html">FAQ</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
 <main class="main-content">
   <h1>Privacy Policy</h1>
@@ -62,7 +74,7 @@
   <p>This policy may be updated as the site evolves. The effective date at the top of this page reflects the most recent update.</p>
 
   <h2>Contact</h2>
-  <p>Privacy questions: <a href="mailto:partnerships@calc-hq.ca">partnerships@calc-hq.ca</a></p>
+  <p>Privacy questions: <a href="/contact.html">Contact us</a></p>
 </main>
 
 <footer class="site-footer">
@@ -71,5 +83,29 @@
 
 <script src="js/config.js"></script>
 <script src="js/network.js"></script>
+
+<script>
+  var hamburger = document.querySelector('.hamburger');
+  var mobileNav = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-overlay');
+  function toggleMenu() {
+    var isOpen = hamburger.classList.toggle('active');
+    mobileNav.classList.toggle('active', isOpen);
+    overlay.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+  }
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+    mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+  }
+</script>
+
 </body>
 </html>
