@@ -221,7 +221,6 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   pointer-events: none;
   font-family: 'IBM Plex Mono', monospace;
 }
-.input-wrap-dollar input[type="number"] { padding-left: 36px; }
 .input-group input[type="number"],
 .input-group select {
   width: 100%;
@@ -250,6 +249,8 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   border-color: var(--accent-mid);
   box-shadow: 0 0 0 3px rgba(45,122,71,0.12);
 }
+/* Dollar-prefix inputs need extra left padding to clear the $ symbol */
+.input-wrap-dollar input[type="number"] { padding-left: 36px; }
 .optional-inputs {
   border-top: 1px solid var(--border);
   margin-top: 8px;
