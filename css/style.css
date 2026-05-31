@@ -221,7 +221,7 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   pointer-events: none;
   font-family: 'IBM Plex Mono', monospace;
 }
-.input-wrap-dollar input { padding-left: 28px; }
+.input-wrap-dollar input { padding-left: 36px; }
 .input-group input[type="number"],
 .input-group select {
   width: 100%;
@@ -774,13 +774,34 @@ code {
 
 /* ── Contact Page ── */
 .page-hero {
-  padding: 28px 0 18px;
+  background: var(--accent);
+  color: #fff;
+  padding: 28px 0 24px;
+  border-bottom: 3px solid var(--accent-mid);
+}
+.page-hero .container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
 }
 .page-hero h1 {
-  font-size: 1.6rem;
+  font-size: clamp(1.3rem, 3.5vw, 1.8rem);
   font-weight: 700;
-  color: var(--text-primary);
+  letter-spacing: -0.02em;
   margin-bottom: 8px;
+  color: #fff;
+}
+.page-hero p {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.82);
+  max-width: 580px;
+  line-height: 1.5;
+  margin: 0;
+}
+.page-body {
+  max-width: var(--content-width);
+  margin: 32px auto;
+  padding: 0 24px;
 }
 .info-box {
   background: var(--accent-light);
@@ -901,6 +922,9 @@ code {
   .ts-sep { display: none; }
   .hero { padding: 24px 16px 20px; }
   .authority-section { padding: 20px 16px; }
+  .page-hero { padding: 22px 0 18px; }
+  .page-hero h1 { font-size: 1.2rem; }
+  .page-body { padding: 0 16px; margin: 24px auto; }
   .input-row { grid-template-columns: 1fr; }
   .rates-row { grid-template-columns: 1fr; gap: 8px; }
   .rate-value { font-size: 1.2rem; }
