@@ -39,14 +39,20 @@
   <a href="contact.html">Contact</a>
 </nav>
 
-<main class="main-content">
-  <div class="page-hero">
+<section class="page-hero">
+  <div class="container">
     <h1>Contact</h1>
-    <p>Use the form below to send us a message. We aim to respond within 2–3 business days. For general questions about Ontario bonus tax rules, you may also find answers in our <a href="faq.html">FAQ</a>.</p>
+    <p>Questions, corrections, or feedback — we'd like to hear from you.</p>
   </div>
+</section>
 
-  <div class="info-box">
-    <strong>Partnerships &amp; Inquiries:</strong> For partnership, content collaboration, or advertising on the Ontario payroll calculator network, contact <a href="mailto:partnerships@calc-hq.ca">partnerships@calc-hq.ca</a>
+<div class="page-body">
+
+  <h2>Get in Touch</h2>
+  <p>Use the form below to send us a message. We aim to respond within 2–3 business days. For general questions about Ontario bonus tax rules, you may also find answers in our <a href="faq.html">FAQ</a>.</p>
+
+  <div class="info-box" style="margin-bottom:24px">
+    <p style="margin:0"><strong>Partnership inquiries:</strong> <a href="mailto:partnerships@calc-hq.ca" style="color:inherit;font-weight:600;">partnerships@calc-hq.ca</a></p>
   </div>
 
   <form class="contact-form" id="contact-form" novalidate>
@@ -80,13 +86,13 @@
   </ul>
 
   <h2>What We Cannot Help With</h2>
-  <ul>
-    <li>Personal tax advice or T1 return preparation</li>
-    <li>CRA account support — contact the <a href="https://www.canada.ca/en/revenue-agency/services/e-services/e-services-individuals/account-individuals.html" target="_blank" rel="noopener noreferrer">CRA My Account portal</a></li>
-    <li>Employer payroll setup or software configuration</li>
-    <li>Legal advice on employment contracts or severance agreements</li>
-  </ul>
-</main>
+  <p>We are not tax professionals and cannot provide personalized tax advice, payroll advice, or assist with your specific tax return. For those needs, please consult a Certified Professional Accountant (CPA) or use the CRA's official services at <a href="https://www.canada.ca/en/revenue-agency.html" target="_blank" rel="noopener">canada.ca</a>.</p>
+
+  <div class="info-box">
+    <a href="https://calc-hq.ca/methodology/ontario-bonus-tax/">Full methodology: Ontario Bonus Tax Calculator – Calc-HQ.ca</a>
+  </div>
+
+</div>
 
 <footer class="site-footer">
   <div id="network-footer"></div>
@@ -105,26 +111,28 @@ function handleContactSubmit(e) {
 }
 document.getElementById('contact-form').addEventListener('submit', handleContactSubmit);
 
-var hamburger = document.querySelector('.hamburger');
-var mobileNav = document.getElementById('mobile-nav');
-var overlay = document.getElementById('mobile-overlay');
-function toggleMenu() {
-  var isOpen = hamburger.classList.toggle('active');
-  mobileNav.classList.toggle('active', isOpen);
-  overlay.classList.toggle('active', isOpen);
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-}
-function closeMenu() {
-  hamburger.classList.remove('active');
-  mobileNav.classList.remove('active');
-  overlay.classList.remove('active');
-  hamburger.setAttribute('aria-expanded', 'false');
-}
-if (hamburger) {
-  hamburger.addEventListener('click', toggleMenu);
-  overlay.addEventListener('click', closeMenu);
-  mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
-}
+(function() {
+  var hamburger = document.querySelector('.hamburger');
+  var mobileNav = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-overlay');
+  function toggleMenu() {
+    var isOpen = hamburger.classList.toggle('active');
+    mobileNav.classList.toggle('active', isOpen);
+    overlay.classList.toggle('active', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    mobileNav.classList.remove('active');
+    overlay.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  if (hamburger) hamburger.addEventListener('click', toggleMenu);
+  if (overlay) overlay.addEventListener('click', closeMenu);
+  if (mobileNav) mobileNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+})();
 </script>
 
 </body>
