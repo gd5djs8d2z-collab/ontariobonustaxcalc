@@ -17,7 +17,7 @@
   <title>Ontario Bonus Tax Calculator 2026 — CRA T4032 Withholding Estimate</title>
 
   <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
+  <script async src="https://pagead2googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7744853829365165" crossorigin="anonymous"></script>
 
   <!-- Stylesheet with cache bust -->
   <link rel="stylesheet" href="css/style.css?v=2026.2">
@@ -288,91 +288,44 @@
          data-full-width-responsive="true"></ins>
   </div>
 
-  <!-- ── Authority Content Sections ──────────────────────────────────────── -->
+  <!-- ── Content Sections ──────────────────────────────────────────────── -->
 
   <!-- 1. How Bonus Tax Works in Ontario -->
   <article class="authority-section" id="how-it-works">
     <h2>How Bonus Tax Works in Ontario</h2>
-    <p>When your Ontario employer pays you a bonus, they are legally required to withhold income tax, CPP contributions, and EI premiums before the money reaches your bank account. Unlike your regular bi-weekly or monthly paycheque — which is taxed based on a flat annualized projection of that regular amount — a bonus triggers a different withholding calculation under the <strong>CRA T4032 annualization method</strong>.</p>
-    <p>The employer does not simply apply a flat percentage to your bonus. Instead, they combine your bonus with your regular pay period income, project that combined figure over the full year, and then determine what marginal tax bracket applies to the extra income. That marginal tax becomes the withholding on your bonus.</p>
-    <h3>What This Calculator Computes</h3>
-    <p>For a $10,000 bonus on top of an $85,000 salary paid bi-weekly in Ontario, this calculator estimates:</p>
-    <ul>
-      <li>Federal income tax withholding: approx. $2,600 (26% marginal federal rate)</li>
-      <li>Ontario provincial tax withholding: approx. $910 (9.15% marginal Ontario rate)</li>
-      <li>CPP1/CPP2 impact: depends on your year-to-date earnings relative to YMPE ($74,600)</li>
-      <li>EI impact: depends on year-to-date insurable earnings relative to the $68,900 ceiling</li>
-      <li>Combined effective withholding rate: approximately 35–37% depending on timing</li>
-    </ul>
-    <h3>CRA T4032-ON Annualization Method</h3>
-    <p>The CRA T4032 bonus method requires the employer to:</p>
+    <p>When your Ontario employer pays you a bonus, they must withhold income tax, CPP contributions, and EI premiums before the money reaches your account. Unlike your regular paycheque — which is taxed based on a flat annual projection — a bonus triggers a different calculation under the <strong>CRA T4032 annualization method</strong>.</p>
+
+    <h3>Why the Withholding Looks High</h3>
+    <p>Your employer doesn't apply a flat percentage to your bonus. They combine it with your regular pay period income, project that total over the full year, and determine which marginal tax bracket applies to the extra income. That marginal rate is then applied to the entire bonus in a single pay period. If your salary places you in the 20.5% federal bracket, your bonus is withheld at 20.5% federal plus Ontario provincial tax plus CPP plus EI — all stacked on top of each other. That stacking, not a special bonus rate, is why a $10,000 bonus might deposit only around $6,300.</p>
+
+    <h3>CRA T4032 Annualization Method</h3>
+    <p>The method works in five steps:</p>
     <ol>
-      <li>Annualize the employee's regular pay period income (e.g., bi-weekly pay × 26)</li>
-      <li>Calculate the total federal + Ontario tax on that annualized regular income</li>
-      <li>Add the bonus to the annualized income</li>
-      <li>Recalculate total federal + Ontario tax on the combined annualized amount</li>
-      <li>The difference between steps 4 and 2 is the income tax to withhold from the bonus</li>
+      <li>Annualize your regular pay period income (e.g., bi-weekly pay × 26)</li>
+      <li>Calculate federal + Ontario tax on that annualized income</li>
+      <li>Add the bonus to the annualized total</li>
+      <li>Recalculate tax on the combined amount</li>
+      <li>The difference between steps 4 and 2 is the income tax withheld from your bonus</li>
     </ol>
     <div class="formula-display">Tax on bonus = Tax(annualized salary + bonus) − Tax(annualized salary)</div>
+    <p>Your bonus is withheld at your marginal rate — the rate on your top dollars of income. It's not spread across lower brackets the way your annual income actually is. Only the income above each bracket threshold is taxed at the higher rate when you file. The annualization method concentrates the full marginal effect into one pay period, which makes the withholding appear high.</p>
+
+    <h3>Withholding Is Not Your Final Tax Bill</h3>
+    <p>What your employer deducts is a prepayment — not the final determination of what you owe. When you file your T1 return, your actual tax is calculated on total annual income after all credits and deductions. RRSP contributions, the Basic Personal Amount ($16,452 federal, $12,989 Ontario for 2026), and other credits all reduce your actual tax — but they may not be reflected in the employer's withholding unless you've filed an updated TD1. If your employer withheld more than your actual liability, the CRA refunds the excess. If too little was withheld, you owe the difference at filing.</p>
+
+    <h3>CPP and EI on Bonuses</h3>
+    <p>Both are subject to annual maximums that directly affect how much comes off your bonus. CPP1 applies at 5.95% on earnings up to $74,600 (YMPE), max contribution $4,230.45. CPP2 applies at 4% on earnings between $74,600 and $85,000 (YAMPE), max $416.00. EI applies at 1.63% on insurable earnings up to $68,900, max $1,123.07. If your year-to-date salary already exceeds these ceilings, no further CPP or EI is deducted from your bonus. If you're below, they apply only to the portion within remaining room. Ontario surtax may also apply if your basic Ontario tax exceeds $5,818 — the calculator handles this automatically.</p>
+
+    <h3>What Happens at Tax Time</h3>
+    <p>When you file your T1 return, the CRA calculates your actual tax on your full-year income. The total your employer withheld throughout the year — from both regular pay and bonuses — is credited against that amount. If the total withheld exceeds what you owe, you receive a refund. If it falls short, perhaps because you have other income sources, you pay the difference.</p>
+
     <p class="source-cite">Source: <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/payroll/t4032-payroll-deductions-tables/t4032on-jan/t4032on-january-general-information.html" target="_blank" rel="noopener noreferrer">CRA T4032-ON Payroll Deductions Tables (2026)</a></p>
   </article>
 
-  <!-- 2. Why Your Bonus Looks Over-Taxed -->
-  <article class="authority-section" id="why-overtaxed">
-    <h2>Why Your Bonus Looks Over-Taxed</h2>
-    <p>Employees in Ontario frequently receive a $10,000 bonus and are surprised to see only $6,300–$6,500 deposited. The reason is not that bonuses are taxed at a special high rate — it is that the annualization method applies your <strong>marginal tax rate</strong> to the full bonus amount in a single pay period.</p>
-    <p>If your $85,000 salary places you in the 20.5% federal bracket, your entire $10,000 bonus is withheld at 20.5% federal + 9.15% Ontario + CPP + EI. Compare that to a regular bi-weekly paycheque of $3,269 — that pay period is only withholding its proportional share of tax across the full year.</p>
-    <h3>The Marginal Rate Misconception</h3>
-    <p>Many employees believe their entire salary is taxed at their marginal rate after receiving a bonus with heavy withholding. This is not how Canadian income tax works. Only the income above each bracket threshold is taxed at the higher rate. The annualization method concentrates the tax effect of the full bonus into one pay period, which is why withholding appears high relative to your normal cheque.</p>
-    <h3>The Annualization Effect in Practice</h3>
-    <p>Consider an employee earning $95,000 annually (bi-weekly). Their regular bi-weekly pay of $3,654 is withheld at rates spread across lower brackets. When a $15,000 bonus arrives, the annualization projects $110,000 total income — pushing the marginal federal rate to 26% on the portion above $117,045... actually, at $110,000, the federal marginal rate is still 20.5%, but the Ontario marginal rate may have increased. The entire bonus is then withheld at those marginal rates in a single period, creating the "over-taxed" appearance.</p>
-    <h3>Year-End True-Up</h3>
-    <p>At tax filing time (April 30 each year), your T1 return calculates your actual tax owing based on your total annual income. If your employer withheld more than your actual tax liability — which can happen if CPP/EI were over-withheld or if your income puts you in a lower effective bracket — the CRA refunds the excess. Withholding is not your final tax bill.</p>
-  </article>
-
-  <!-- 3. Bonus Withholding vs Actual Taxes Owed -->
-  <article class="authority-section" id="withholding-vs-actual">
-    <h2>Bonus Withholding vs Actual Taxes Owed</h2>
-    <p>The most important distinction in Canadian bonus taxation: <strong>employer withholding and CRA taxes owed are two separate things</strong>. What your employer deducts at source is a remittance on your behalf — it is not the final determination of your tax liability.</p>
-    <h3>Withholding (Employer Obligation)</h3>
-    <p>Under the <em>Income Tax Act</em> (Canada), employers must withhold estimated income tax on all employment income using the CRA T4032 tables. For bonuses, they use the annualization method described above. This withholding is credited toward your total annual tax balance.</p>
-    <h3>Actual Taxes Owed (T1 Return)</h3>
-    <p>Your actual Ontario income tax for the year is determined on your T1 General return by applying federal and Ontario brackets to your <strong>total annual taxable income</strong> — salary + bonus + any other income — after all credits and deductions. The Basic Personal Amount ($16,452 federal, $12,989 Ontario for 2026) offsets some tax before any bracket rate applies.</p>
-    <h3>Common Scenarios Where Withholding ≠ Tax Owing</h3>
-    <ul>
-      <li><strong>Over-withholding:</strong> Your bonus pushed projected annual income into a higher bracket, but your actual full-year income was lower (e.g., you left the job in September). CRA issues a refund.</li>
-      <li><strong>Under-withholding:</strong> You have other income sources (rental, freelance, investment) that your employer could not account for. You may owe additional tax in April.</li>
-      <li><strong>RRSP deduction:</strong> If you make an RRSP contribution before March 1 of the following year and claim it on your return, it reduces your taxable income and lowers your actual tax owing — potentially turning a "heavily withheld bonus" into a net refund.</li>
-      <li><strong>CPP/EI over-contributions:</strong> If you worked at multiple employers and collectively exceeded the annual CPP/EI maximums ($4,230.45 CPP1 / $1,123.07 EI for 2026), the CRA refunds the excess through your T1 return.</li>
-    </ul>
-  </article>
-
-  <!-- 4. CPP and EI on Bonuses -->
-  <article class="authority-section" id="cpp-ei">
-    <h2>CPP and EI on Bonuses</h2>
-    <p>CPP and EI are not withheld at a flat rate from your entire bonus. Both are subject to <strong>annual maximum contribution thresholds</strong>. Whether your bonus triggers CPP or EI — and how much — depends entirely on your year-to-date earnings at the time the bonus is paid.</p>
-    <h3>CPP1 on Bonuses (2026)</h3>
-    <p>CPP1 applies at <code>5.95%</code> on pensionable earnings between the <strong>basic exemption ($3,500)</strong> and the <strong>Year's Maximum Pensionable Earnings (YMPE: $74,600)</strong>. The maximum employee CPP1 contribution is <code>$4,230.45</code> per year.</p>
-    <ul>
-      <li>If your year-to-date salary is already above $74,600 before the bonus: <strong>zero CPP1</strong> is withheld from the bonus.</li>
-      <li>If your year-to-date salary is $60,000 and the bonus is $10,000: CPP1 applies only on the portion that brings total earnings up to $74,600 — i.e., on $10,000 (since $60,000 + $10,000 = $70,000 ≤ $74,600 in this case, the full $10,000 gets CPP1 at 5.95% = $595).</li>
-      <li>If your year-to-date salary is $70,000 and the bonus is $10,000: CPP1 applies only on $4,600 ($74,600 − $70,000) × 5.95% = $273.70.</li>
-    </ul>
-    <h3>CPP2 on Bonuses (2026)</h3>
-    <p>CPP2 applies at <code>4%</code> on earnings between the YMPE ($74,600) and the Year's Additional Maximum Pensionable Earnings (YAMPE: $85,000). The maximum CPP2 contribution is <code>$416.00</code> per year. CPP2 contributions do <strong>not</strong> generate a non-refundable tax credit.</p>
-    <h3>EI Premiums on Bonuses (2026)</h3>
-    <p>EI is withheld at <code>1.63%</code> on insurable earnings up to the annual maximum insurable earnings ceiling of <code>$68,900</code>. The maximum annual EI premium is <code>$1,123.07</code>.</p>
-    <ul>
-      <li>If your year-to-date salary already exceeds $68,900: <strong>zero EI</strong> is withheld from the bonus.</li>
-      <li>If your year-to-date salary is $65,000 and the bonus is $10,000: EI applies on $3,900 ($68,900 − $65,000) × 1.63% = $63.57.</li>
-    </ul>
-    <p class="source-cite">Sources: <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/cpp-contribution-rates-maximums-exemptions.html" target="_blank" rel="noopener noreferrer">CRA CPP 2026</a> &nbsp;·&nbsp; <a href="https://www.canada.ca/en/employment-social-development/news/2025/09/canada-employment-insurance-commission-sets-the-2026-employment-insurance-premium-rate.html" target="_blank" rel="noopener noreferrer">ESDC EI 2026</a></p>
-  </article>
-
-  <!-- 5. Ontario Bonus Examples -->
+  <!-- 2. Ontario Bonus Examples -->
   <article class="authority-section" id="examples">
     <h2>Ontario Bonus Examples — Tax Year 2026</h2>
-    <p>The following examples use actual 2026 CRA rates and brackets. All calculations use the T4032 annualization method. Salary is assumed to be the total base salary earned through the full year (year-to-date earnings equal to annual salary at time of bonus payment).</p>
+    <p>All calculations use the CRA T4032 annualization method with 2026 rates.</p>
 
     <div class="example-block">
       <h3>Example 1 — $85,000 salary + $10,000 bonus (bi-weekly)</h3>
@@ -390,7 +343,7 @@
 
     <div class="example-block">
       <h3>Example 2 — $120,000 salary + $25,000 bonus (bi-weekly)</h3>
-      <p>Higher-income Ontario employee. Salary exceeds YMPE ($74,600) and max insurable EI ($68,900) — CPP2 partial, no EI on bonus.</p>
+      <p>Higher-income Ontario employee. Salary exceeds YMPE and max insurable EI — CPP2 partial, no EI on bonus.</p>
       <div class="ex-row"><span>Gross bonus</span><span>$25,000.00</span></div>
       <div class="ex-row"><span>Federal withholding (26% marginal)</span><span>$6,500.00</span></div>
       <div class="ex-row"><span>Ontario withholding (11.16% marginal)</span><span>$2,790.00</span></div>
@@ -417,58 +370,21 @@
     </div>
   </article>
 
-  <!-- 6. Common Bonus Tax Questions (high-intent decision content) -->
-  <article class="authority-section" id="faq">
-    <h2>Common Bonus Tax Questions</h2>
-
-    <div class="faq-item">
-      <div class="faq-q">Can I reduce bonus withholding by asking my employer to hold back on CPP or EI?</div>
-      <div class="faq-a">
-        <p>No. Employers are legally required to withhold CPP and EI under the <em>Canada Pension Plan Act</em> and the <em>Employment Insurance Act</em> respectively — subject only to the annual maximum thresholds. However, if you are approaching the annual maximums ($4,230.45 CPP1 / $1,123.07 EI), the employer is obligated to reduce deductions accordingly. You can also ask your employer to apply an RRSP deduction amount on Form TD1 to reduce income tax withholding.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">My employer used a flat 30% withholding on my bonus — is that correct?</div>
-      <div class="faq-a">
-        <p>No. The CRA does not authorize a flat-rate lump-sum withholding for employment bonuses in Ontario. The correct method is the T4032 annualization method. Some employers may use simplified approximations, but any significant deviation from the annualization method should be verified with your payroll department. If under-withheld, you may owe tax on your T1 return.</p>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">How does Ontario surtax interact with bonus income?</div>
-      <div class="faq-a">
-        <p>Ontario surtax is an additional provincial tax that applies when your basic Ontario tax exceeds $5,818 (20% surtax on the excess) or $7,446 (an additional 36% surtax). For 2026, this typically affects incomes above approximately $90,000–$100,000. If your bonus pushes your annualized income into surtax territory, the T4032 withholding includes the surtax automatically — this calculator accounts for it.</p>
-      </div>
-    </div>
-  </article>
-
-  <!-- 7. CRA Methodology -->
+  <!-- 3. Calculation Method & 2026 Rates -->
   <article class="authority-section" id="methodology">
-    <h2>CRA Methodology &amp; Formula Transparency</h2>
-    <p>All calculations in this tool use the <strong>CRA T4032-ON Bonus Method</strong> (annualization) as documented in the Payroll Deductions Tables for Ontario, effective January 2026.</p>
-    <h3>Step-by-Step Calculation</h3>
-    <ol>
-      <li><strong>Annualize regular income:</strong> <code>Regular period income × pay periods per year</code></li>
-      <li><strong>Calculate tax on annualized salary:</strong> Apply federal brackets, subtract Federal BPA credit (<code>$16,452 × 14%</code>); apply Ontario brackets, subtract Ontario BPA credit (<code>$12,989 × 5.05%</code>); add Ontario surtax if applicable.</li>
-      <li><strong>Add bonus:</strong> <code>Annualized salary + bonus amount</code></li>
-      <li><strong>Recalculate tax on combined total</strong> using same method as step 2.</li>
-      <li><strong>Tax to withhold on bonus:</strong> <code>Tax(salary + bonus) − Tax(salary)</code></li>
-      <li><strong>CPP1 on bonus:</strong> <code>min(bonus × 5.95%, remaining CPP1 room)</code> — limited to earnings below YMPE ($74,600).</li>
-      <li><strong>CPP2 on bonus:</strong> <code>min(bonus portion in YMPE–YAMPE band × 4%, remaining CPP2 room)</code></li>
-      <li><strong>EI on bonus:</strong> <code>min(bonus portion below max insurable ceiling × 1.63%, remaining EI room)</code></li>
-      <li><strong>Optional deduction:</strong> RRSP deduction reduces taxable income at steps 2 and 4.</li>
-    </ol>
-    <h3>2026 Rates Reference</h3>
+    <h2>Calculation Method &amp; 2026 Rates</h2>
+    <p>This calculator uses the <strong>CRA T4032-ON Bonus Method</strong> (annualization) with 2026 federal and Ontario brackets, CPP1/CPP2, and EI rates.</p>
+
+    <h3>2026 Rates Used</h3>
     <ul>
       <li>Federal brackets: 14% / 20.5% / 26% / 29% / 33%</li>
       <li>Ontario brackets: 5.05% / 9.15% / 11.16% / 12.16% / 13.16%</li>
-      <li>Federal BPA: $16,452 (full) | Credit rate: 14%</li>
-      <li>Ontario BPA: $12,989 | Credit rate: 5.05%</li>
+      <li>Federal BPA: $16,452 | Ontario BPA: $12,989</li>
       <li>CPP1: 5.95% | YMPE: $74,600 | Max: $4,230.45</li>
       <li>CPP2: 4.00% | YAMPE: $85,000 | Max: $416.00</li>
       <li>EI: 1.63% | Max insurable: $68,900 | Max premium: $1,123.07</li>
     </ul>
+
     <h3>Data Sources</h3>
     <ul class="source-list">
       <li><a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/payroll/t4032-payroll-deductions-tables/t4032on-jan/t4032on-january-general-information.html" target="_blank" rel="noopener noreferrer">CRA T4032-ON Payroll Deductions Tables — January 2026</a></li>
@@ -476,14 +392,13 @@
       <li><a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/cpp-contribution-rates-maximums-exemptions.html" target="_blank" rel="noopener noreferrer">CRA CPP Contribution Rates, Maximums &amp; Exemptions — 2026</a></li>
       <li><a href="https://www.canada.ca/en/employment-social-development/news/2025/09/canada-employment-insurance-commission-sets-the-2026-employment-insurance-premium-rate.html" target="_blank" rel="noopener noreferrer">ESDC — 2026 EI Premium Rate Announcement</a></li>
     </ul>
+
     <h3>Limitations</h3>
     <ul>
       <li>This calculator estimates employer <em>withholding</em> — not your final T1 tax liability.</li>
-      <li>Quebec employees follow a different provincial system (QPP, Quebec income tax) — this tool is Ontario-only.</li>
-      <li>Non-resident employees or those with complex TD1/TD1ON claim codes may see different results from their employer.</li>
-      <li>Self-employed individuals do not have bonus withholding — they pay tax through quarterly instalments or on their T1 return.</li>
-      <li>Ontario surtax approximation applies where basic Ontario tax exceeds CRA thresholds; exact surtax amounts depend on the full T1 calculation.</li>
-      <li>Multiple employment income sources in the same year are not modelled — enter combined salary if applicable.</li>
+      <li>Ontario-only. Quebec employees follow a different provincial system.</li>
+      <li>Non-resident employees or those with complex TD1/TD1ON claim codes may see different results.</li>
+      <li>Multiple employment income sources in the same year are not modelled.</li>
     </ul>
   </article>
 
