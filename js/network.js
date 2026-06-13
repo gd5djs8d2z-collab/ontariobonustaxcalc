@@ -9,27 +9,51 @@
 
 const NETWORK_TOOLS = [
   {
-    name: "Ontario Take Home Calc",
-    desc: "Estimate your Ontario net pay after federal tax, provincial tax, CPP, EI, and OHP.",
-    url: "https://ontariotakehomecalc.ca",
-    live: true
-  },
-  {
-    name: "Ontario Income Tax Calc",
+    name: "Ontario Income Tax Calculator",
     desc: "See every federal and Ontario tax bracket, your effective vs marginal rate, and surtax.",
     url: "https://ontarioincometaxcalc.ca",
     live: true
   },
   {
-    name: "Ontario Raise Calc",
+    name: "Ontario Take-Home Pay Calculator",
+    desc: "Estimate your Ontario net pay after federal tax, provincial tax, CPP, EI, and OHP.",
+    url: "https://ontariotakehomecalc.ca",
+    live: true
+  },
+  {
+    name: "Ontario Raise Calculator",
     desc: "Calculate your after-tax take-home change from a raise or salary increase.",
     url: "https://ontarioraisecalc.ca",
     live: true
   },
   {
-    name: "Marginal Tax Calc",
+    name: "Ontario Marginal Tax Calculator",
     desc: "Find your combined federal and Ontario marginal tax rate on any income level.",
     url: "https://marginaltaxcalc.ca",
+    live: true
+  },
+  {
+    name: "Ontario Commission Tax Calculator",
+    desc: "Estimate Ontario commission tax withholding using the CRA T4032 bonus method.",
+    url: "https://ontariocommissiontaxcalc.ca",
+    live: true
+  },
+  {
+    name: "Ontario Severance Pay Calculator",
+    desc: "Calculate Ontario severance pay and withholding using the CRA T4032 method.",
+    url: "https://ontarioseverancepaycalc.ca",
+    live: true
+  },
+  {
+    name: "Ontario Termination Pay Calculator",
+    desc: "Estimate Ontario termination pay and tax withholding amounts.",
+    url: "https://ontarioterminationpaycalc.ca",
+    live: true
+  },
+  {
+    name: "Ontario Self-Employed Tax Calculator",
+    desc: "Calculate Ontario self-employment tax, CPP, and net income estimates.",
+    url: "https://ontarioselfemployedtaxcalc.ca",
     live: true
   }
 ];

@@ -49,48 +49,22 @@
 <div class="page-body">
 
   <h2>Get in Touch</h2>
-  <p>Use the form below to send us a message. We aim to respond within 2–3 business days. For general questions about Ontario bonus tax rules, you may also find answers in our <a href="faq.html">FAQ</a>.</p>
+  <p>For general questions about Ontario bonus tax rules, check our <a href="faq.html">FAQ</a> first — most common questions are answered there.</p>
 
   <div class="info-box" style="margin-bottom:24px">
     <p style="margin:0"><strong>Partnership inquiries:</strong> <a href="mailto:partnerships@calc-hq.ca" style="color:inherit;font-weight:600;">partnerships@calc-hq.ca</a></p>
   </div>
 
-  <form class="contact-form" id="contact-form" novalidate>
-    <div class="field">
-      <label for="cf-name">Your Name</label>
-      <input type="text" id="cf-name" name="name" placeholder="Jane Smith" required>
-    </div>
-    <div class="field">
-      <label for="cf-email">Email Address</label>
-      <input type="email" id="cf-email" name="email" placeholder="jane@example.com" required>
-    </div>
-    <div class="field">
-      <label for="cf-subject">Subject</label>
-      <input type="text" id="cf-subject" name="subject" placeholder="Rate correction, question about bonus tax">
-    </div>
-    <div class="field">
-      <label for="cf-message">Message</label>
-      <textarea id="cf-message" name="message" placeholder="Your message..." required></textarea>
-    </div>
-    <div>
-      <button type="submit" class="calc-btn">Send Message</button>
-    </div>
-  </form>
-
   <h2>What We Can Help With</h2>
   <ul>
     <li>Corrections to tax rates, bracket thresholds, or CPP/EI maximums</li>
-    <li>Calculator methodology questions or feedback</li>
+    <li>Calculator feedback or bug reports</li>
     <li>Partnership or advertising inquiries</li>
     <li>Broken links or display issues</li>
   </ul>
 
   <h2>What We Cannot Help With</h2>
   <p>We are not tax professionals and cannot provide personalized tax advice, payroll advice, or assist with your specific tax return. For those needs, please consult a Certified Professional Accountant (CPA) or use the CRA's official services at <a href="https://www.canada.ca/en/revenue-agency.html" target="_blank" rel="noopener">canada.ca</a>.</p>
-
-  <div class="info-box">
-    <a href="https://calc-hq.ca/methodology/ontario-bonus-tax/">Full methodology: Ontario Bonus Tax Calculator – Calc-HQ.ca</a>
-  </div>
 
 </div>
 
@@ -102,16 +76,6 @@
 <script src="js/network.js"></script>
 <script src="js/ads.js"></script>
 <script>
-function handleContactSubmit(e) {
-  e.preventDefault();
-  var form = e.target;
-  var btn = form.querySelector('button[type="submit"]');
-  btn.textContent = 'Message Sent';
-  btn.disabled = true;
-  form.reset();
-}
-document.getElementById('contact-form').addEventListener('submit', handleContactSubmit);
-
 (function() {
   var hamburger = document.querySelector('.hamburger');
   var mobileNav = document.getElementById('mobile-nav');
